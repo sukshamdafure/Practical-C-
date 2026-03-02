@@ -1,0 +1,20 @@
+name: .NET CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0
+
+    - run: dotnet restore
+    - run: dotnet build --no-restore
+    - run: dotnet test --no-build
